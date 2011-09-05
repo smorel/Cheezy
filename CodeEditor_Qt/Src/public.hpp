@@ -1,0 +1,60 @@
+#pragma once
+
+#include <QtCore>
+#include <QtGui>
+#include <QtXml>
+
+#include "qce-config.h"
+#include "light_vector.h"
+#include "qcalltip.h"
+#include "qcodeedit.h"
+#include "qdocument.h"
+#include "qdocumentcommand.h"
+#include "qdocumentcursor.h"
+#include "qcodecompletionengine.h"
+#include "qdocumentsearch.h"
+#include "qeditor.h"
+#include "qeditorfactory.h"
+#include "qeditorinputbindinginterface.h"
+#include "qeditorinputbinding.h"
+#include "qeditsession.h"
+#include "qformat.h"
+#include "qformatscheme.h"
+#include "qformatfactory.h"
+#include "qlanguagedefinition.h"
+#include "qlanguagefactory.h"
+#include "qnfa.h"
+#include "qnfadefinition.h"
+#include "qpanel.h"
+#include "qpanellayout.h"
+#include "qreliablefilewatch.h"
+#include "qsimplecolorpicker.h"
+#include "qsnippetpatternloader.h"
+#include "qsnippet.h"
+#include "qsnippetbinding.h"
+#include "qsnippetmanager.h"
+#include "qfoldpanel.h"
+#include "qstatuspanel.h"
+
+#include "qdocumentline.h"
+#include "qdocumentbuffer.h"
+#include "qlinechangepanel.h"
+#include "qlinemarkpanel.h"
+#include "qlinemarksinfocenter.h"
+#include "qlinenumberpanel.h"
+
+#include "ui_editconfig.h"
+#include "qeditconfig.h"
+#include "ui_formatconfig.h"
+#include "qformatconfig.h"
+#include "ui_gotoline.h"
+#include "qgotolinepanel.h"
+#include "ui_gotolinedialog.h"
+#include "qgotolinedialog.h"
+#include "ui_searchreplace.h"
+#include "qsearchreplacepanel.h"
+#include "ui_snippetedit.h"
+#include "qsnippetedit.h"
+
+
+void linkQCodeEdit();

@@ -1,0 +1,3 @@
+
+	MethodExtension::MethodExtension(){
+	}

@@ -1,0 +1,32 @@
+
+	class DescriptorExtension;
+	template<typename Type, typename ParentDescriptor = Descriptor>
+	class TypedDescriptor : public ParentDescriptor{
+	public:
+		TypedDescriptor(const std::string& _name, const Uint _size, const Descriptor* _parentDescriptor,
+			DescriptorExtension* ext, const std::string& subTypes)
+			: ParentDescriptor(_name,_size,_parentDescriptor,ext,subTypes){
+		}
+
+		virtual void* allocate(...) const{    
+			va_list ap;
+			return MemoryManager::getInstance()->typedAllocate<Type>(size,extension->getMemoryCategory(),ap);
+		}
+
+		virtual void deallocate(void* memory) const{
+			MemoryManager::getInstance()->typedDeallocate<Type>(memory,extension->getMemoryCategory());
+		}
+
+		virtual void copy(void* source, void* target) const{
+			Type* s = reinterpret_cast<Type*>(source);
+			Type* t = reinterpret_cast<Type*>(target);
+			//Pass through copy constructor
+			*s = Type(*t);
+		}
+		
+		virtual void pushToScript(void* data,const std::string& name, lua_State* L) const{
+			Type* s = reinterpret_cast<Type*>(data);
+			//voir comment associer la valeur au nom ...
+			luabridge::tdstack<Type>::push(L,*s);
+		}
+	};

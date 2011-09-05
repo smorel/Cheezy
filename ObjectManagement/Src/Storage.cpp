@@ -1,0 +1,2 @@
+CLASS_IMP(Storage);
+CLASS_END;
