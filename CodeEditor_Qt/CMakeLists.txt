@@ -19,18 +19,19 @@ ENDIF( ${CMAKE_MINOR_VERSION} GREATER 4 )
 
 # Always include the PerformanceStudio base directory
 INCLUDE_DIRECTORIES(${CodeEditor_Qt_SOURCE_DIR})
-INCLUDE_DIRECTORIES(${CodeEditor_Qt_BINARY_DIR} )
+INCLUDE_DIRECTORIES(${CodeEditor_Qt_BINARY_DIR}/Src )
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} )
 
 # we need this to be able to include headers produced by uic in our code
 # (CMAKE_BINARY_DIR holds a path to the build directory, 
 # while INCLUDE_DIRECTORIES() works just like INCLUDEPATH from qmake)
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/cmake/CodeEditor_Qt/Src/)
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/cmake/CodeEditor_Qt/)
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/CodeEditor_Qt/Src/)
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/CodeEditor_Qt/Resources/)
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/CodeEditor_Qt/Src/)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/CodeEditor_Qt/)
+INCLUDE_DIRECTORIES(${Cheezy_SOURCE_DIR}/CodeEditor_Qt/Src/)
+INCLUDE_DIRECTORIES(${Cheezy_SOURCE_DIR}/CodeEditor_Qt/Resources/)
+INCLUDE_DIRECTORIES(${Cheezy_SOURCE_DIR}/)
 
 FILE(GLOB ALL_CPP "./Src/*.cpp")
 SOURCE_GROUP(Src FILES ${ALL_CPP})

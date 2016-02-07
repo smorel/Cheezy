@@ -5,6 +5,10 @@
 		AbstractObject();
 		AbstractObject(const AbstractObject& other);
 
+		static const Descriptor* getClassDescriptor() {
+			return NULL;
+		}
+
 		template<typename Type>
 		AbstractObject(Type& o){
 			set(&o,ReflectionManager::getDescriptor<Type>(&o));

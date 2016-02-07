@@ -18,11 +18,12 @@ INCLUDE(${QT_USE_FILE})
 #3rd partys and additional include paths
 SET(3rdParty_DIR ${Application_Qt_SOURCE_DIR}/../../3rdParty CACHE PATH "3rdParty Directory")
 INCLUDE_DIRECTORIES(${3rdParty_DIR})
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR})
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/cmake/Application_Qt/Src/)
+INCLUDE_DIRECTORIES(${Cheezy_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/Application_Qt/Src/)
 INCLUDE_DIRECTORIES(../)
 
-INCLUDE_DIRECTORIES(${UIViews_SOURCE_DIR}/cmake/CodeEditor_Qt/)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/CodeEditor_Qt/)
+INCLUDE_DIRECTORIES(${Application_Qt_BINARY_DIR}/Src )
 
 
 FILE(GLOB ALL_CPP "./Src/*.cpp")

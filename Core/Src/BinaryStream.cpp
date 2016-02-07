@@ -23,7 +23,7 @@
 	}
 	
 	Boolean BinaryStream::isValid() const{
-		return innerData().stream != 0;
+		return innerData().stream.is_open();
 	}
 
 	void BinaryStream::serialize(Boolean& v,const std::string& key) const{

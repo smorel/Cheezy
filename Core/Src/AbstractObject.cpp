@@ -1,5 +1,4 @@
 
-	
 	AbstractObject::AbstractObject()
 		: adress(0),descriptor(0){
 	}
