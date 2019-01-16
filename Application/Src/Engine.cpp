@@ -4,7 +4,12 @@ CLASS_END;
 Engine::Engine(){
 	//Force link with all dependent libraries ...
 	linkCore();
-	linkObjectManagement();
+	linkRuntime();
+	linkImplement();
+	linkDelegate();
+	linkUnitTest();
+	linkObject();
+	linkObjectContext();
 	linkSerialization();
 	linkFlowChart();
 }

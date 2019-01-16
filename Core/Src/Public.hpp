@@ -20,54 +20,12 @@
 #pragma warning( disable : 4786 )
 #pragma warning (disable:4996)
 
-extern "C"
-{
-#include <Rpc.h>
-#include <Lua/Src/lua.h>
-#include <Lua/Src/lualib.h>
-#include <Lua/Src/lauxlib.h>
-#include <Lua/Src/lauxlib.h>
-}
-
-#include <LuaBridge/LuaBridge.h>
-
-#include "FastDelegate.hpp"
-#include "FastDelegateBind.hpp"
-using namespace fastdelegate;
 
 #include "Meta.hpp"
-#include "NoCopy.hpp"
 #include "NativeTypes.hpp"
+#include "NoCopy.hpp"
 
 #include "Singleton.hpp"
-#include "MemoryManager.hpp"
-#include "LuaScriptManager.hpp"
-#include "ReflectionMacros.hpp"
 #include "StringUtils.hpp"
-#include "Descriptor.hpp"
-#include "TypedDescriptor.hpp"
-#include "AbstractObject.hpp"
-#include "Variant.hpp"
-#include "Attribute.hpp"
-#include "Method.hpp"
-#include "ReflectionManager.hpp"
-#include "Migration.hpp"
-#include "Stream.hpp"
-#include "AbstractSerializer.hpp"
-#include "NativeDescriptors.hpp"
-#include "DescriptorExtension.hpp"
-#include "AttributeExtension.hpp"
-#include "MethodExtension.hpp"
-#include "BinaryStream.hpp"
-#include "ID.hpp"
-#include "UnitTest.hpp"
-#include "ListConcept.hpp"
-#include "StlDescriptors.hpp"
-#include "Object.hpp"
-#include "LuaScript.hpp"
-#include "enum.hpp"
-#include "ImplementationFactory.hpp"
-#include "SignalSlot.hpp"
-#include "SignalSlotDescriptors.hpp"
 
 void linkCore();

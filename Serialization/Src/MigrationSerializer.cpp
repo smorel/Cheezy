@@ -3,11 +3,11 @@
 	CLASS_END;
 
 	MigrationSerializer::MigrationSerializer()
-		: AbstractSerializer(){
+		: ISerializer(){
 	}
 
 	MigrationSerializer::MigrationSerializer(Stream* _stream)
-		: AbstractSerializer(_stream){
+		: ISerializer(_stream){
 	}
 
 	
@@ -50,22 +50,29 @@
 					const Attribute* attribute = d->getAttribute(attributeName);
 					if(attribute && attributeDescriptor == attribute->getDescriptor()){
 						const AbstractObject attObj = attribute->get(o.getAdress());
-						attribute->getDescriptor()->extension->serialize(attObj.getAdress(),this);
+						DescriptorSerializationExtension* serializationExt = attributeDescriptor->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+						serializationExt->serialize(attObj.getAdress(),this);
 					}
 					else{
 						if(attribute){
 							MigrationAttributeTypeChange m;
 							m.attribute = attribute;
 							m.value = Variant(0,attributeDescriptor);
-							attributeDescriptor->extension->serialize(m.value.getAdress(),this);
-							d->extension->migration(o.getAdress(),&m);
+							DescriptorSerializationExtension* serializationExt = attributeDescriptor->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+							serializationExt->serialize(m.value.getAdress(),this);
+
+							DescriptorMigrationExtension* migrationExt = attributeDescriptor->extension->GetOrCreateExtension<DescriptorMigrationExtension>();
+							migrationExt->migration(o.getAdress(),&m);
 						}
 						else{
 							MigrationAttributeLost m;
 							m.attributeName = attributeName;
 							m.value = Variant(0,attributeDescriptor);
-							attributeDescriptor->extension->serialize(m.value.getAdress(),this);
-							d->extension->migration(o.getAdress(),&m);
+							DescriptorSerializationExtension* serializationExt = attributeDescriptor->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+							serializationExt->serialize(m.value.getAdress(),this);
+
+							DescriptorMigrationExtension* migrationExt = attributeDescriptor->extension->GetOrCreateExtension<DescriptorMigrationExtension>();
+							migrationExt->migration(o.getAdress(),&m);
 						}
 					}
 
@@ -80,7 +87,8 @@
 
 					MigrationAttributeNotInData m;
 					m.attribute = attribute;
-					d->extension->migration(o.getAdress(),&m);
+					DescriptorMigrationExtension* migrationExt = d->extension->GetOrCreateExtension<DescriptorMigrationExtension>();
+					migrationExt->migration(o.getAdress(),&m);
 				}
 
 				break;
@@ -94,7 +102,8 @@
 					std::string descName = attribute->getDescriptor()->getName();//not optimal to check !!!
 					stream->serialize(descName,"Type");
 					const AbstractObject attObj = attribute->get(o.getAdress());
-					attribute->getDescriptor()->extension->serialize(attObj.getAdress(),this);
+					DescriptorSerializationExtension* serializationExt = attribute->getDescriptor()->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+					serializationExt->serialize(attObj.getAdress(),this);
 					stream->endSection();
 				}
 				break;
@@ -116,7 +125,8 @@
 					else{
 						void* owner = desc->allocate();
 						returnValue.set(owner,desc);
-						desc->extension->serialize(owner,this);
+						DescriptorSerializationExtension* serializationExt = desc->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+						serializationExt->serialize(owner,this);
 					}
 					stream->endSection();
 					break;
@@ -125,7 +135,8 @@
 				{
 					std::string descName = o.getDescriptor()->getName();//not optimal to check !!!
 					stream->beginSection(descName);
-					o.getDescriptor()->extension->serialize(o.getAdress(),this);
+					DescriptorSerializationExtension* serializationExt = o.getDescriptor()->extension->GetOrCreateExtension<DescriptorSerializationExtension>();
+					serializationExt->serialize(o.getAdress(),this);
 					stream->endSection();
 					returnValue = o;
 					break;

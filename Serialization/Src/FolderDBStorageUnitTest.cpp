@@ -11,7 +11,7 @@
 
 		class Toto{
 			CLASS(Toto);
-			/*void serialize(void* data, const AbstractSerializer* s){
+			/*void serialize(void* data, const ISerializer* s){
 				s.serialize(u,"u");
 			}*/
 		public:

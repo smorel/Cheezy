@@ -36,12 +36,7 @@ ADD_LIBRARY(Core STATIC
 	${ALL_CC}
 	${Schematic_pch}
 )
-
-ADD_DEPENDENCIES(Core
-	Lua
-	)
 	
 TARGET_LINK_LIBRARIES( Core
 	Rpcrt4
-	Lua
 	)

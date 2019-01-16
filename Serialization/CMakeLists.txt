@@ -38,10 +38,15 @@ ADD_LIBRARY(Serialization STATIC
 )
 
 ADD_DEPENDENCIES(Serialization
-	ObjectManagement
+	Core
+	Runtime
+	Object
+	UnitTest
 	)
 
 TARGET_LINK_LIBRARIES( Serialization
 	Core
-	ObjectManagement
+	Runtime
+	Object
+	UnitTest
 	)

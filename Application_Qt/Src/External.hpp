@@ -1,5 +1,0 @@
-#include "Core/Src/Public.hpp"
-#include "ObjectManagement/Src/Public.hpp"
-#include "Serialization/Src/Public.hpp"
-#include "Application/Src/Public.hpp"
-#include "CodeEditor_Qt/Src/Public.hpp"

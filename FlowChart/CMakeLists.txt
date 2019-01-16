@@ -38,9 +38,19 @@ ADD_LIBRARY(FlowChart STATIC
 )
 
 ADD_DEPENDENCIES(FlowChart
-	ObjectManagement
+	Core
+	Runtime
+	Implement
+	Delegate
+	UnitTest
+	Object
 	)
 	
 TARGET_LINK_LIBRARIES( FlowChart
-	ObjectManagement
+	Core
+	Runtime
+	Implement
+	Delegate
+	UnitTest
+	Object
 	)

@@ -1,6 +1,6 @@
 
-	class MigrationSerializer : public AbstractSerializer{
-		CLASS(MigrationSerializer,AbstractSerializer);
+	class MigrationSerializer : public ISerializer{
+		CLASS(MigrationSerializer,ISerializer);
 	public:
 		MigrationSerializer();
 		MigrationSerializer(Stream* _stream);

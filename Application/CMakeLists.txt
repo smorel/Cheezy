@@ -1,5 +1,9 @@
 PROJECT(Application)
 
+IF( ${CMAKE_MINOR_VERSION} GREATER 5 )
+    CMAKE_POLICY(SET CMP0020 NEW)
+ENDIF( ${CMAKE_MINOR_VERSION} GREATER 5 )
+
 
 #3rd partys and additional include paths
 SET(3rdParty_DIR ${Application_SOURCE_DIR}/../../3rdParty CACHE PATH "3rdParty Directory")
@@ -35,11 +39,27 @@ ADD_LIBRARY(Application STATIC
 )
 
 ADD_DEPENDENCIES(Application
+	Core
+	Runtime
+	UnitTest
+	Delegate
+	Implement
+	Object
 	Serialization
+	ObjectContext
 	FlowChart
+	Lua
 	)
 
 TARGET_LINK_LIBRARIES( Application
+	Core
+	Runtime
+	UnitTest
+	Delegate
+	Implement
+	Object
 	Serialization
+	ObjectContext
 	FlowChart
+	Lua
 	)

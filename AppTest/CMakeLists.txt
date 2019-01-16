@@ -31,6 +31,8 @@ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
 INCLUDE_DIRECTORIES(${3rdParty_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/AppTest/Src/)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/Qt/Application_Qt/)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/Qt/CodeEditor_Qt/)
 INCLUDE_DIRECTORIES(${Cheezy_SOURCE_DIR}/)
 
 SET(AppTest_SC_BRANCH "${AppTest_SOURCE_DIR}" CACHE STRING "AppTests Source Control Branch")
@@ -92,10 +94,14 @@ ADD_EXECUTABLE(AppTest ${EXECUTABLE_FORMAT}
 	)
 
 ADD_DEPENDENCIES(AppTest
-	Lua
 	Core
-	ObjectManagement
+	UnitTest
+	Delegate
+	Runtime
+	Implement
+	Object
 	Serialization
+	Lua
 	FlowChart
 	Application
 	CodeEditor_Qt
@@ -103,10 +109,14 @@ ADD_DEPENDENCIES(AppTest
 	)
 
 TARGET_LINK_LIBRARIES( AppTest
-	Lua
 	Core
-	ObjectManagement
+	UnitTest
+	Delegate
+	Runtime
+	Implement
+	Object
 	Serialization
+	Lua
 	FlowChart
 	Application
 	CodeEditor_Qt
