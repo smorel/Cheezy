@@ -17,9 +17,9 @@ Application_Qt::Application_Qt()
 : QApplication(i,0),controller(0){
 
 #ifdef Q_WS_MAC
-	QApplication::setStyle(new QMacStyle);
+	QApplication::setStyle(QStyleFactory::create("macintosh"));
 #else
-	QApplication::setStyle(new QWindowsXPStyle);
+	QApplication::setStyle(QStyleFactory::create("windows"));
 #endif
 }
 
@@ -35,4 +35,4 @@ void Application_Qt::timerEvent(QTimerEvent *){
 	}
 }
 
-#include "moc_ApplicationController_Qt.cxx"
+#include "moc_ApplicationController_Qt.cpp"

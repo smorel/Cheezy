@@ -6,8 +6,8 @@
 	void DescriptorExtension::serialize(void* owner,const AbstractSerializer* s){
 		if(serializeMutator){
 			std::vector<AbstractObject> args;
-			args.push_back(AbstractObject(owner));
-			args.push_back(AbstractObject(s));
+			args.push_back(std::move(AbstractObject(owner)));
+			args.push_back(std::move(AbstractObject(s)));
 			serializeMutator->execute(owner,args);
 		}
 		else{
@@ -19,7 +19,7 @@
 	void DescriptorExtension::migration(void* owner,const MigrationData* d){
 		if(migrationMutator){
 			std::vector<AbstractObject> args;
-			args.push_back(AbstractObject(d));
+			args.push_back(std::move(AbstractObject(d)));
 			migrationMutator->execute(owner,args);
 		}
 	}

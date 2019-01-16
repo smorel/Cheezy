@@ -11,5 +11,4 @@
 
 	protected:
 		void getAttributes(const Descriptor* d,std::set<const Attribute*>& allAttributes) const;
-		void serializeAttribute(const AbstractObject& o, const Attribute* a, std::vector<const Attribute*>& allAttributes) const;
 	};

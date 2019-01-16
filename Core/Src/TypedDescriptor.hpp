@@ -26,6 +26,6 @@
 		virtual void pushToScript(void* data,const std::string& name, lua_State* L) const{
 			Type* s = reinterpret_cast<Type*>(data);
 			//voir comment associer la valeur au nom ...
-			luabridge::tdstack<Type>::push(L,*s);
+			luabridge::Stack<Type>::push(L,*s);
 		}
 	};

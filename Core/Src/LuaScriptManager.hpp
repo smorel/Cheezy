@@ -4,16 +4,15 @@ public:
 	LuaScriptManager();
 	virtual ~LuaScriptManager();
 
-	static luabridge::module& module();
+	static lua_State* globalState() { initialize(); return L; }
 	static std::string formatTypeName(const std::string& str);
 
-protected:
+public:
 	static void initialize();
 
 protected:
-	lua_State *L;
+	static lua_State *L;
 	int errfunc_index;
-	luabridge::module *M;
 
 	friend class LuaScript;
 };

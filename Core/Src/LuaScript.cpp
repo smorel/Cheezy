@@ -67,7 +67,7 @@ void LuaScript::pause(){
 }
 
 void LuaScript::resume(){
-	if (lua_resume( innerData().L, 0 )!= 0){
+	if (lua_resume( innerData().L, innerData().L, 0 )!= 0){
 		innerData().lastRuntimeError = lua_tostring(innerData().L, -1);
 		printf("%s\n",innerData().lastRuntimeError);
 	}

@@ -94,6 +94,7 @@
 	DECLARE_NATIVE_DESCRIPTOR(Float);
 	DECLARE_NATIVE_DESCRIPTOR(Byte);
 
+	/*
 	namespace luabridge{
 		template <>
 		struct tdstack <Uint>
@@ -108,6 +109,7 @@
 			}
 		};
 	}
+	*/
 
 	template<>
 	void fromString<Uint>(const std::string& str, Uint& res);

@@ -1,10 +1,8 @@
 PROJECT(Core)
 
-#Cmake version dependency checking
-IF( ${CMAKE_MINOR_VERSION} GREATER 4 )
-	CMAKE_POLICY(SET CMP0005 OLD)
-ENDIF( ${CMAKE_MINOR_VERSION} GREATER 4 )
-
+IF( ${CMAKE_MINOR_VERSION} GREATER 5 )
+    CMAKE_POLICY(SET CMP0020 NEW)
+ENDIF( ${CMAKE_MINOR_VERSION} GREATER 5 )
 
 #3rd partys and additional include paths
 SET(3rdParty_DIR ${Core_SOURCE_DIR}/../../3rdParty CACHE PATH "3rdParty Directory")
@@ -40,11 +38,10 @@ ADD_LIBRARY(Core STATIC
 )
 
 ADD_DEPENDENCIES(Core
-	LuaBridge
+	Lua
 	)
 	
 TARGET_LINK_LIBRARIES( Core
 	Rpcrt4
 	Lua
-	LuaBridge
 	)

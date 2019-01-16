@@ -61,4 +61,4 @@ void MainWindow_Qt::initialize(MainController_Qt* c){
 }
 
 
-#include "moc_MainController_Qt.cxx"
+#include "moc_MainController_Qt.cpp"

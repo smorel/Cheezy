@@ -1,5 +1,5 @@
 
-	Attribute::Attribute(const std::string& _name,unsigned int _offset,
+	Attribute::Attribute(const std::string& _name,INT_PTR _offset,
 		const Descriptor* _descriptor,const Descriptor* _containerDescriptor)
 		: name(_name),offset(_offset),descriptor(_descriptor),containerDescriptor(_containerDescriptor){
 		extension = new AttributeExtension();
@@ -24,7 +24,7 @@
 		}
 	}
 
-	void Attribute::set(void* owner, AbstractObject o) const{
+	void Attribute::set(void* owner, const AbstractObject& o) const{
 		if(!extension->mutator){
 			Byte* adress = (Byte*)owner + offset;
 			//ASSERT(o.getDescriptor() == descriptor);

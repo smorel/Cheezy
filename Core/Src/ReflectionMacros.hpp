@@ -11,6 +11,7 @@
 		typedef Type Result;
 	};
 
+	/*
 namespace luabridge{
 	//SEB carrefull here as shared_ptr could make our non scripted objects deleted ...
 	template <typename T>
@@ -43,7 +44,7 @@ namespace luabridge{
 		// Set the userdata's metatable
 		luaL_getmetatable(L, d->getName().c_str());
 		lua_setmetatable(L, -2);
-	}
+	}*/
 
 	/* Implement if needed
 	template <typename T>
@@ -65,7 +66,7 @@ namespace luabridge{
 	template <typename T>
 	void tdstack <const T&>::push (lua_State *L, const T &data){
 	}*/
-}
+//}
 
 #define CONCATENATE(str,d)\
 	if(!str.empty() && d != NoType::getClassDescriptor())str += ",";\
@@ -90,21 +91,18 @@ namespace luabridge{
 
 #define CLASS_SCRIPT(name,type,parentType)\
 	const Descriptor* parentTypeDescriptor = ReflectionManager::getDescriptor<parentType>();\
-	luabridge::class__<type>& scriptClass = parentTypeDescriptor ?\
-		LuaScriptManager::module().subclass<type>(LuaScriptManager::formatTypeName(name).c_str(),parentTypeDescriptor->getName().c_str()) :\
-		LuaScriptManager::module().class_<type>(LuaScriptManager::formatTypeName(name).c_str());\
-	scriptClass.constructor<void (*)()>()
+	luabridge::Namespace::Class<type> scriptClass;\
+	if(parentTypeDescriptor == nullptr){ luabridge::getGlobalNamespace(LuaScriptManager::globalState()).beginClass <type> (scriptClass, name.c_str()); }\
+	else {luabridge::getGlobalNamespace(LuaScriptManager::globalState()).deriveClass <type,parentType> (scriptClass, name.c_str()); }\
+	scriptClass.addConstructor <void (*) ()> ()
 
 
 #define TEMPLATE_CLASS_SCRIPT(name,type,parentType,...)\
 	const Descriptor* parentTypeDescriptor = ReflectionManager::getDescriptor<parentType>();\
-	luabridge::class__<type<__VA_ARGS__> >& scriptClass = parentTypeDescriptor ?\
-		LuaScriptManager::module().subclass<type<__VA_ARGS__>>(LuaScriptManager::formatTypeName(name).c_str(),parentTypeDescriptor->getName().c_str()) :\
-		LuaScriptManager::module().class_<type<__VA_ARGS__>>(LuaScriptManager::formatTypeName(name).c_str());\
-	scriptClass.constructor<void (*)()>()
-
-	/*luabridge::class__<type>& scriptClass = LuaScriptManager::module().class_<type>(\
-		name.c_str()).constructor<void (*)()>()*/
+	luabridge::Namespace::Class<type<__VA_ARGS__>> scriptClass;\
+	if(parentTypeDescriptor == nullptr){ luabridge::getGlobalNamespace(LuaScriptManager::globalState()).beginClass <type<__VA_ARGS__>> (scriptClass, name.c_str()); }\
+	else {luabridge::getGlobalNamespace(LuaScriptManager::globalState()).deriveClass <type<__VA_ARGS__>,parentType> (scriptClass, name.c_str()); }\
+	scriptClass.addConstructor <void (*) ()> ()
 	
 #define SIMPLE_CLASS(name,...)\
 public:\
@@ -170,6 +168,7 @@ public:\
 		CLASS_SCRIPT(descriptor->getName(),declaration,ParentType)
 
 #define CLASS_END\
+		scriptClass.endClass();\
 		return descriptor;}
 
 #define ATTRIBUTE_BASE(attributeName)\
@@ -179,34 +178,34 @@ public:\
 
 #define ATTRIBUTE(attributeName)\
 	ATTRIBUTE_BASE(attributeName);\
-	scriptClass.property_rw(#attributeName, &SelfType::attributeName)
+	scriptClass.addData (#attributeName, &SelfType::attributeName)
 
 #define ATTRIBUTE_GET(attributeName, accessor)\
 	ATTRIBUTE_BASE(attributeName);\
-	currentAttribute->extension->registerAccessor(#accessor,accessor)\
-	scriptClass.property_rw(#attributeName, accessor);\
-	scriptClass.method(MethodBase::formatName(#accessor).c_str(), accessor)
+	currentAttribute->extension->registerAccessor(#accessor,accessor);\
+	scriptClass.addProperty(#attributeName, accessor);\
+	scriptClass.addFunction (MethodBase::formatName(#accessor).c_str(), accessor)
 
 #define ATTRIBUTE_GETSET(attributeName, accessor, mutator)\
 	ATTRIBUTE_BASE(attributeName);\
 	currentAttribute->extension->registerAccessor(#accessor,accessor);\
 	currentAttribute->extension->registerMutator(#mutator,mutator);\
-	scriptClass.property_rw(#attributeName, accessor, mutator);\
-	scriptClass.method(MethodBase::formatName(#accessor).c_str(), accessor);\
-	scriptClass.method(MethodBase::formatName(#mutator).c_str(), mutator)
+	scriptClass.addProperty(#attributeName, accessor, mutator);\
+	scriptClass.addFunction(MethodBase::formatName(#accessor).c_str(), accessor);\
+	scriptClass.addFunction(MethodBase::formatName(#mutator).c_str(), mutator)
 
 #define ATTRIBUTE_ADD_REMOVE(attributeName, insertor, removor)\
 	ATTRIBUTE_BASE(attributeName);\
 	currentAttribute->extension->registerInsertor(#insertor,insertor);\
 	currentAttribute->extension->registerRemovor(#removor,removor);\
-	scriptClass.property_ro(#attributeName, &SelfType::attributeName);\
-	scriptClass.method(MethodBase::formatName(#insertor).c_str(), insertor);\
-	scriptClass.method(MethodBase::formatName(#removor).c_str(), removor)
+	scriptClass.addData(#attributeName, &SelfType::attributeName);\
+	scriptClass.addFunction(MethodBase::formatName(#insertor).c_str(), insertor);\
+	scriptClass.addFunction(MethodBase::formatName(#removor).c_str(), removor)
 
 #define FUNCTION(func)\
 	currentMethod = ReflectionManager::makeMethod(#func,func);\
 	descriptor->registerMethod(currentMethod);\
-	scriptClass.method(MethodBase::formatName(#func).c_str(), func)
+	scriptClass.addFunction(MethodBase::formatName(#func).c_str(), func)
 
 #define CLASS_MEMORY_CATEGORY(category)\
 	descriptor->extension->setMemoryCategory(category)

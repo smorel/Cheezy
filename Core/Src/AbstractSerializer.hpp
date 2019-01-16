@@ -15,6 +15,13 @@
 			}
 		}
 
+		template<typename Type>
+		void serialize(const Type& v,const std::string& key = Stream::emptyKey) const{
+			if(stream){
+				stream->serialize(const_cast<Type&>(v),key);
+			}
+		}
+
 	//Overrideable logic
 	public:
 		virtual void serializeAttributes(const AbstractObject& o) const;

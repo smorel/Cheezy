@@ -125,7 +125,7 @@ MAKE_TEST(FolderDBStorageUnitTest)
 		/*SAVE OBJECT CONTEXT TEST
 		*/
 		{
-			FolderDBStorage s("d:\\test");
+			FolderDBStorage s("f:\\test");
 			s.clear();
 			ObjectContextCoordinator::registerObjectContext("Document",new ObjectContext(&s));
 			MacroDefinitionValidation* d = 
@@ -143,13 +143,16 @@ MAKE_TEST(FolderDBStorageUnitTest)
 			d->t.t = 
 				ObjectContextCoordinator::allocate<MacroDefinitionValidation::Toto::Test>("Document");
 			d->t.t->proxy = Proxy<Uint>(d,"t/u");
+
+			//TODO: INFINITE LOOP here.
+			//save should make sure we do not save circular references more than once !
 			ObjectContextCoordinator::saveAll();
 		}
 
 		/*LOAD OBJECT CONTEXT TEST
 		*/
 		{
-			FolderDBStorage s("d:\\test");
+			FolderDBStorage s("f:\\test");
 			ObjectContextCoordinator::registerObjectContext("Document2",new ObjectContext(&s));
 			Object* bootstrap = ObjectContextCoordinator::getBootstrap("Document2",true);
 			if(bootstrap && bootstrap->isKindOf<MacroDefinitionValidation>()){

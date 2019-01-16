@@ -36,8 +36,8 @@ protected:
 		}
 
 		const Attribute* attribute;
-		Uint attributeOffset;
-		Uint parentOffset;
+		INT_PTR attributeOffset;
+		INT_PTR parentOffset;
 		Boolean updated;
 	};
 	NoCopy<InnerData> innerData;

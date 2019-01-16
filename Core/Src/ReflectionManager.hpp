@@ -9,7 +9,7 @@
 
 		template<typename Type>
 		static Attribute* makeAttribute(const std::string& name,Type* offset, const Descriptor* containerType){
-			Attribute* a = new Attribute(name,(Uint)offset,getDescriptor<Type>(),containerType);
+			Attribute* a = new Attribute(name,static_cast<Uint>((INT_PTR)offset),getDescriptor<Type>(),containerType);
 			return a;
 		}
 

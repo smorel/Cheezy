@@ -93,7 +93,7 @@ AbstractObject ProxyBase::get(){
 
 void* ProxyBase::getOwner() const{
 	if(reference){
-		return (void*)((Uint)reference.get() + innerData().parentOffset);
+		return (void*)((INT_PTR)reference.get() + innerData().parentOffset);
 	}
 	return 0;
 }

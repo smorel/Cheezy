@@ -37,4 +37,4 @@ void Action_Qt::_triggered( bool checked ){
 	}
 }
 
-#include "moc_ActionController_Qt.cxx"
+#include "moc_ActionController_Qt.cpp"

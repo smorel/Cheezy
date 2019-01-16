@@ -51,9 +51,6 @@ MAKE_TEST(ProxyUnitTest)
 	Uint g = testProxy.get();
 	testProxy.set(8);
 	Uint g2 = testProxy.get();
-	if(g != g2){
-		testProxy.set(g);
-	}
 
 	Uint u = 5;
 	Variant v(u);

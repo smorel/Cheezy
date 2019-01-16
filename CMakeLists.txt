@@ -23,10 +23,6 @@ IF (EXISTS "${Cheezy_SOURCE_DIR}/lua")
 	ADD_SUBDIRECTORY(lua)
 ENDIF (EXISTS "${Cheezy_SOURCE_DIR}/lua")
 
-IF (EXISTS "${Cheezy_SOURCE_DIR}/luaBridge")
-	ADD_SUBDIRECTORY(luaBridge)
-ENDIF (EXISTS "${Cheezy_SOURCE_DIR}/luaBridge")
-
 IF (EXISTS "${Cheezy_SOURCE_DIR}/CodeEditor_Qt")
 	ADD_SUBDIRECTORY(CodeEditor_Qt)
 ENDIF (EXISTS "${Cheezy_SOURCE_DIR}/CodeEditor_Qt")

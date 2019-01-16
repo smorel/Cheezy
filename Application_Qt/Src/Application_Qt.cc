@@ -1,5 +1,7 @@
 #include <QtCore>
 #include <QtGui>
+#include <QtWidgets>
+
 
 #include "External.hpp"
 #include "Private.hpp"

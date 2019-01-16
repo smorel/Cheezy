@@ -557,7 +557,7 @@ void QDocumentSearch::next(bool backward, bool all)
 				{
 					QString replacement = m_replace;
 					
-					for ( int i = m_regexp.numCaptures(); i >= 0; --i )
+					for ( int i = m_regexp.captureCount(); i >= 0; --i )
 						replacement.replace(QString("\\") + QString::number(i),
 											m_regexp.cap(i));
 					

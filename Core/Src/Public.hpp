@@ -29,7 +29,7 @@ extern "C"
 #include <Lua/Src/lauxlib.h>
 }
 
-#include <LuaBridge/Src/luaBridge.hpp>
+#include <LuaBridge/LuaBridge.h>
 
 #include "FastDelegate.hpp"
 #include "FastDelegateBind.hpp"
