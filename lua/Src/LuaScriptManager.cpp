@@ -3,6 +3,8 @@ lua_State* LuaScriptManager::L = nullptr;
 
 LuaScriptManager::LuaScriptManager()
 	: Singleton<LuaScriptManager>(){
+	initialize();
+	initBridge();
 }
 
 LuaScriptManager::~LuaScriptManager(){
@@ -92,4 +94,36 @@ template<typename Type, typename ParentType>
 void LuaScriptManager::registerClass(const Descriptor* desc, const Descriptor* parentDesc) {
 
 }
+
+template<typename MemFn>
+void LuaScriptManager::registerFunction(const Descriptor* desc, const MethodBase* method, MemFn function) {
+
+}
+
+
+implement own version of lua bridge   
+
+template <class T>
+  class Class : public ClassBase
+
+  per Descriptor
+
+
+
+    template <class FP>
+    Class <T>& addStaticFunction (char const* name, FP const fp)
+	
+    template <class TG>
+    Class <T>& addProperty (char const* name, TG (T::* get) () const)
+
+    template <class TG, class TS>
+    Class <T>& addProperty (char const* name, TG (T::* get) () const, void (T::* set) (TS))
+	
+    template <class TG, class TS = TG>
+    Class <T>& addProperty (char const* name, TG (*get) (T const*), void (*set) (T*, TS) = 0)
+
+    template <class U>
+    Class <T>& addData (char const* name, const U T::* mp, bool isWritable = true)
+
+
 */
